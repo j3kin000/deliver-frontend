@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from "react";
+import Logo from "./assets/images/logo-delivery.svg";
+import { tokens, useMode } from "./utils/theme";
+import { ThemeProvider } from "@emotion/react";
+import { useTheme } from "@mui/material";
 
-function App() {
+const Page = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <img
+        src={Logo}
+        alt=""
+        style={{ backgroundColor: colors.blueAccent[100], width: "300px" }}
+      />
+    </Fragment>
   );
-}
+};
+const App = () => {
+  const [theme] = useMode();
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Page />
+    </ThemeProvider>
+  );
+};
 
 export default App;
