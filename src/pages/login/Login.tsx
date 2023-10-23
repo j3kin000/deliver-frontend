@@ -4,14 +4,22 @@ import { ReactComponent as DeliveryMan } from "../../assets/images/delivery-man.
 import DeliveryLogo from "../../components/global/DeliveryLogo";
 import LoginForm, { InitValuesType } from "../../components/login/LoginForm";
 import { FormikHelpers } from "formik";
+import { login } from "../../api/endpoint";
 
 const Login = () => {
-  const handleFormSubmit = (
+  const handleFormSubmit = async (
     values: InitValuesType,
     actions: FormikHelpers<InitValuesType>
   ) => {
     const { email, password } = values;
-    actions.setErrors({ customError: "Network failed!" });
+    try {
+      const response = await login({ email, password });
+    } catch (error) {
+      actions.setErrors({
+        customError: (error as string) || "Network failed!",
+      });
+    }
+    actions.setSubmitting(false);
   };
   return (
     <Fragment>

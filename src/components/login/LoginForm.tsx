@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from "react";
+import { FC, Fragment } from "react";
 import { Formik, FormikHelpers } from "formik";
 import { Box, FormHelperText } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -37,6 +37,7 @@ const LoginForm: FC<LoginFormProps> = ({ handleFormSubmit }) => {
           handleBlur,
           handleChange,
           handleSubmit,
+          isSubmitting,
         }) => (
           <form onSubmit={handleSubmit}>
             <Box
@@ -62,7 +63,7 @@ const LoginForm: FC<LoginFormProps> = ({ handleFormSubmit }) => {
                 error={errors.password}
               />
               <Box>
-                <CustomButton label="submit" />
+                <CustomButton label="submit" isDisabled={isSubmitting} />
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                   <Link
                     to={"/forgot-password"}

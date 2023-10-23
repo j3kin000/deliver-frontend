@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import { PaletteMode } from "@mui/material";
+import { PaletteMode, ThemeOptions } from "@mui/material";
 import { useMemo, useState } from "react";
 
 export type ModeType = PaletteMode;
@@ -19,6 +19,17 @@ export const tokens = (mode: ModeType) => ({
           800: "#662114",
           900: "#33110a",
         },
+        secondary: {
+          100: "#e0e0e0",
+          200: "#c2c2c2",
+          300: "#a3a3a3",
+          400: "#858585",
+          500: "#666666",
+          600: "#525252",
+          700: "#3d3d3d",
+          800: "#292929",
+          900: "#141414",
+        },
       }
     : {
         primary: {
@@ -32,11 +43,22 @@ export const tokens = (mode: ModeType) => ({
           200: "#662114",
           100: "#33110a",
         },
+        secondary: {
+          900: "#e0e0e0",
+          800: "#c2c2c2",
+          700: "#a3a3a3",
+          600: "#858585",
+          500: "#666666",
+          400: "#525252",
+          300: "#3d3d3d",
+          200: "#292929",
+          100: "#141414",
+        },
       }),
 });
 
 // mui theme settings
-export const themeSettings = (mode: ModeType) => {
+export const themeSettings = (mode: ModeType): ThemeOptions => {
   const colors = tokens(mode);
 
   return {
@@ -48,9 +70,9 @@ export const themeSettings = (mode: ModeType) => {
             primary: {
               main: colors.primary[500],
             },
-            // secondary: {
-            //   main: colors.greenAccent[500],
-            // },
+            secondary: {
+              main: colors.secondary[500],
+            },
             // neutral: {
             //   dark: colors.grey[700],
             //   main: colors.grey[500],
@@ -63,11 +85,11 @@ export const themeSettings = (mode: ModeType) => {
         : {
             // palette values for light mode
             primary: {
-              main: colors.primary[100],
+              main: colors.primary[500],
             },
-            // secondary: {
-            //   main: colors.greenAccent[500],
-            // },
+            secondary: {
+              main: colors.secondary[100],
+            },
             // neutral: {
             //   dark: colors.grey[700],
             //   main: colors.grey[500],
@@ -123,7 +145,7 @@ export type ColorModeType = {
 };
 
 export const useMode = () => {
-  const [mode, setMode] = useState<PaletteMode>("dark");
+  const [mode, setMode] = useState<PaletteMode>("light");
   const colorMode: ColorModeType = useMemo(
     () => ({
       toggleColorMode: () =>
