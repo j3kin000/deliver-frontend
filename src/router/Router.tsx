@@ -9,8 +9,8 @@ const Login = Loader(lazy(() => import("../pages/login/Login")));
 const Router = () => {
   return (
     <Routes>
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<Login />} />
+      <Route path="/" element={<AuthLayout />}>
+        <Route path="login" element={<Login />} />
         <Route path="" element={<Navigate to="login" />} />
         <Route path="*" element={<Status404 />} />
       </Route>

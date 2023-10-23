@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
-import DeliveryMan from "../../assets/images/delivery-man.svg";
+import { ReactComponent as DeliveryMan } from "../../assets/images/delivery-man.svg";
 import DeliveryLogo from "../../components/global/DeliveryLogo";
 import LoginForm, { InitValuesType } from "../../components/login/LoginForm";
 import { FormikHelpers } from "formik";
@@ -32,9 +32,7 @@ const Login = () => {
             </Box>
           </Grid>
           <Grid item xs={12} md={6} lg={"auto"} justifyContent={"flex-end"}>
-            <img
-              src={DeliveryMan}
-              alt=""
+            <DeliveryMan
               style={{
                 width: "100%",
                 height: "100%",
