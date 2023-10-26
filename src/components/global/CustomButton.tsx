@@ -24,7 +24,7 @@ const CustomButton: FC<CustomButtonProps> = memo(
           type="submit"
           variant="contained"
           sx={{
-            backgroundColor: colors.primary[500],
+            backgroundColor: colors.orange[500],
             padding: "15px",
             borderRadius: "20px",
             width: "150px",
@@ -39,7 +39,7 @@ const CustomButton: FC<CustomButtonProps> = memo(
             <CircularProgress
               size={24}
               sx={{
-                color: "orange",
+                color: "green",
               }}
             />
           )}

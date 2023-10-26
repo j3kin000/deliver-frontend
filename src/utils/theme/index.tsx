@@ -6,9 +6,20 @@ export type ModeType = PaletteMode;
 
 // color design tokens export
 export const tokens = (mode: ModeType) => ({
-  ...(mode === "dark"
+  ...(mode === "light"
     ? {
         primary: {
+          100: "#fdfdfd",
+          200: "#fbfbfb",
+          300: "#f8f8f8",
+          400: "#f6f6f6",
+          500: "#f4f4f4",
+          600: "#c3c3c3",
+          700: "#929292",
+          800: "#626262",
+          900: "#313131",
+        },
+        orange: {
           100: "#ffddd6",
           200: "#ffbaad",
           300: "#ff9883",
@@ -33,6 +44,17 @@ export const tokens = (mode: ModeType) => ({
       }
     : {
         primary: {
+          900: "#fdfdfd",
+          800: "#fbfbfb",
+          700: "#f8f8f8",
+          600: "#f6f6f6",
+          500: "#f4f4f4",
+          400: "#c3c3c3",
+          300: "#929292",
+          200: "#626262",
+          100: "#313131",
+        },
+        orange: {
           900: "#ffddd6",
           800: "#ffbaad",
           700: "#ff9883",
@@ -64,11 +86,14 @@ export const themeSettings = (mode: ModeType): ThemeOptions => {
   return {
     palette: {
       mode: mode,
-      ...(mode === "dark"
+      ...(mode === "light"
         ? {
             // palette values for dark mode
             primary: {
-              main: colors.primary[500],
+              main: colors.primary[100],
+            },
+            orange: {
+              main: colors.orange[500],
             },
             secondary: {
               main: colors.secondary[500],
@@ -85,7 +110,10 @@ export const themeSettings = (mode: ModeType): ThemeOptions => {
         : {
             // palette values for light mode
             primary: {
-              main: colors.primary[500],
+              main: colors.primary[100],
+            },
+            orange: {
+              main: colors.secondary[100],
             },
             secondary: {
               main: colors.secondary[100],
@@ -156,5 +184,5 @@ export const useMode = () => {
 
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
-  return [theme, colorMode];
+  return [theme, colorMode] as const;
 };

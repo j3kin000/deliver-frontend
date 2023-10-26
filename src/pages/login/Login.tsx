@@ -23,7 +23,9 @@ const Login = () => {
   };
   return (
     <Fragment>
-      <DeliveryLogo />
+      <Box sx={{ marginLeft: "25px" }}>
+        <DeliveryLogo />
+      </Box>
       <Box flexGrow={1}>
         <Grid
           container
@@ -34,7 +36,7 @@ const Login = () => {
           <Grid item xs={12} sm={16} md={6} lg={5}>
             <Box pt={3}>
               <Typography variant="h1" fontWeight={"bold"}>
-                Your Favorite Food Delivery Partner
+                Your Favorite Goods Delivery Partner
               </Typography>
               <LoginForm handleFormSubmit={handleFormSubmit} />
             </Box>
