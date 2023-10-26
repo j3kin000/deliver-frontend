@@ -6,17 +6,21 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { FormikTouched } from "formik";
 import React, { ChangeEvent, FC, memo } from "react";
+import { InitValuesType } from "../login/LoginForm";
 
 export type CustomTextInputProps = {
   label: string;
   error?: string;
   value?: string;
   name?: string;
+  handleBlur?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   handleChange: (e: ChangeEvent<any>) => void;
+  touched?: boolean;
 };
 const CustomTextInput: FC<CustomTextInputProps> = memo(
-  ({ handleChange, label, error, value, name }) => {
+  ({ handleChange, label, error, value, name, handleBlur, touched }) => {
     return (
       <Box display="flex" flexDirection="column">
         <Typography mb={1}>{label}</Typography>
@@ -34,11 +38,13 @@ const CustomTextInput: FC<CustomTextInputProps> = memo(
               {/* <SendingMail /> */}
             </InputAdornment>
           }
+          type={name}
+          onBlur={handleBlur}
           onChange={handleChange}
           value={value}
           name={name}
         />
-        <FormHelperText error>{error}</FormHelperText>
+        {touched && error && <FormHelperText error>{error}</FormHelperText>}
       </Box>
     );
   }

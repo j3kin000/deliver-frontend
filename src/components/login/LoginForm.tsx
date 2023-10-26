@@ -49,14 +49,18 @@ const LoginForm: FC<LoginFormProps> = ({ handleFormSubmit }) => {
                 {errors.customError}
               </FormHelperText>
               <CustomTextInput
+                handleBlur={handleBlur}
                 handleChange={handleChange}
+                touched={touched.email}
                 label="Email Address:"
                 name="email"
                 value={values.email}
                 error={errors.email}
               />
               <CustomTextInput
+                handleBlur={handleBlur}
                 handleChange={handleChange}
+                touched={touched.password}
                 label="Password:"
                 name="password"
                 value={values.password}

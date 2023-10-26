@@ -12,11 +12,11 @@ export const getData = async (key: string) => {
 
 export const useScreenSize = () => {
   const [theme] = useMode();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const isLargeScreen = useMediaQuery(theme.breakpoints.down("lg"));
+  const issmallscreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const ismediumscreen = useMediaQuery(theme.breakpoints.down("md"));
+  const islargescreen = useMediaQuery(theme.breakpoints.down("lg"));
 
-  return { isSmallScreen, isMediumScreen, isLargeScreen };
+  return { issmallscreen, ismediumscreen, islargescreen };
 };
 
 export const drawerWidth = 240; // Replace with the actual drawer width

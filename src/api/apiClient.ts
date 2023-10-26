@@ -13,7 +13,8 @@ apiClient.interceptors.request.use(
       // const KEY = getData('authorization')
       console.log("requestId", request.headers.requestId);
       console.log("request.method", request.method);
-      // console.log("request.url", request?.baseURL + request?.url);
+      if (request?.baseURL)
+        console.log("request.url", request?.baseURL + request?.url);
 
       console.log("request.data", JSON.stringify(request.data));
       console.log("request.headers", JSON.stringify(request.headers));

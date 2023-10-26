@@ -1,12 +1,14 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { ReactComponent as DeliveryMan } from "../../assets/images/delivery-man.svg";
 import DeliveryLogo from "../../components/global/DeliveryLogo";
 import LoginForm, { InitValuesType } from "../../components/login/LoginForm";
 import { FormikHelpers } from "formik";
 import { login } from "../../api/endpoint";
+import { AppContext } from "../../contexts/AooContext.tsx/AppContext";
 
 const Login = () => {
+  const { dispatch, access_token } = useContext(AppContext);
   const handleFormSubmit = async (
     values: InitValuesType,
     actions: FormikHelpers<InitValuesType>
@@ -14,6 +16,11 @@ const Login = () => {
     const { email, password } = values;
     try {
       const response = await login({ email, password });
+      console.log("response", response);
+      if (response.success) {
+        dispatch({ type: "LOGIN", payload: response.data.access_token });
+        localStorage.setItem("access_token", response.data.access_token);
+      }
     } catch (error) {
       actions.setErrors({
         customError: (error as string) || "Network failed!",
@@ -23,7 +30,7 @@ const Login = () => {
   };
   return (
     <Fragment>
-      <Box sx={{ marginLeft: "25px" }}>
+      <Box sx={{ marginLeft: "0px" }}>
         <DeliveryLogo />
       </Box>
       <Box flexGrow={1}>
@@ -41,7 +48,13 @@ const Login = () => {
               <LoginForm handleFormSubmit={handleFormSubmit} />
             </Box>
           </Grid>
-          <Grid item xs={12} md={6} lg={"auto"} justifyContent={"flex-end"}>
+          <Grid
+            item
+            xs={12}
+            md={"auto"}
+            lg={"auto"}
+            justifyContent={"flex-end"}
+          >
             <DeliveryMan
               style={{
                 width: "100%",

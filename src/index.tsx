@@ -3,10 +3,11 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
-import { ColorModeContextProvider } from "./context/ColorModeContext/ColorModeContext";
 import { CssBaseline } from "@mui/material";
 import { useMode } from "./utils/theme";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import { ColorModeContextProvider } from "./contexts/ColorModeContext/ColorModeContext";
+import { AppContextProvider } from "./contexts/AooContext.tsx/AppContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,17 +17,18 @@ const root = ReactDOM.createRoot(
 
 const Root = () => {
   const [theme] = useMode();
-  console.log("themes", theme.breakpoints.down("md"));
 
   return (
     <React.StrictMode>
       <ColorModeContextProvider>
-        <BrowserRouter>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <App />
-          </ThemeProvider>
-        </BrowserRouter>
+        <AppContextProvider>
+          <BrowserRouter>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <App />
+            </ThemeProvider>
+          </BrowserRouter>
+        </AppContextProvider>
       </ColorModeContextProvider>
     </React.StrictMode>
   );

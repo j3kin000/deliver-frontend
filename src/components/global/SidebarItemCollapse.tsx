@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { appRoutes } from "../../router/appRoutes";
 import SidebarItem from "./SidebarItem";
 
 type Props = {

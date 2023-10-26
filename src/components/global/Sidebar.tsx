@@ -1,17 +1,4 @@
-import {
-  Avatar,
-  Divider,
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Stack,
-  Toolbar,
-  styled,
-  useTheme,
-} from "@mui/material";
+import { Avatar, Divider, Drawer, List, styled, useTheme } from "@mui/material";
 import { FC } from "react";
 import { appRoutes } from "../../router/appRoutes";
 import { drawerWidth } from "../../utils/utils";
@@ -31,16 +18,15 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
 type SidebarProps = {
   open: boolean;
   handleDrawer: () => void;
-  isMediumScreen: boolean;
+  ismediumscreen: boolean;
 };
-const Sidebar: FC<SidebarProps> = ({ open, isMediumScreen, handleDrawer }) => {
+const Sidebar: FC<SidebarProps> = ({ open, ismediumscreen, handleDrawer }) => {
   const theme = useTheme();
 
   return (
     <Drawer
       onClose={handleDrawer}
       sx={{
-        backgroundColor: "red",
         height: 0,
         width: drawerWidth,
         flexShrink: 0,
@@ -49,7 +35,7 @@ const Sidebar: FC<SidebarProps> = ({ open, isMediumScreen, handleDrawer }) => {
           boxSizing: "border-box",
         },
       }}
-      variant={isMediumScreen ? "temporary" : "persistent"}
+      variant={ismediumscreen ? "temporary" : "persistent"}
       anchor="left"
       open={open}
     >
