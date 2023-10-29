@@ -5,10 +5,10 @@ import DeliveryLogo from "../../components/global/DeliveryLogo";
 import LoginForm, { InitValuesType } from "../../components/login/LoginForm";
 import { FormikHelpers } from "formik";
 import { login } from "../../api/endpoint";
-import { AppContext } from "../../contexts/AooContext.tsx/AppContext";
+import { AppContext } from "../../contexts/AppContext.tsx/AppContext";
 
 const Login = () => {
-  const { dispatch, access_token } = useContext(AppContext);
+  const { dispatch } = useContext(AppContext);
   const handleFormSubmit = async (
     values: InitValuesType,
     actions: FormikHelpers<InitValuesType>

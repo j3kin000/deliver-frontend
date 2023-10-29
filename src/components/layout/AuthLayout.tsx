@@ -1,24 +1,26 @@
 import { Box } from "@mui/material";
 import React, { FC, ReactNode, useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { AppContext } from "../../contexts/AooContext.tsx/AppContext";
+import { AppContext } from "../../contexts/AppContext.tsx/AppContext";
+import useAuthentication from "../../utils/hooks/IsAuthenticated";
 
 export type AuthLayoutProps = {
   children?: ReactNode;
 };
 const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
-  const { access_token } = useContext(AppContext);
   const navigate = useNavigate();
+  const isAuthenticated = useAuthentication();
+
   useEffect(() => {
-    if (access_token) {
+    if (isAuthenticated) {
       navigate("/dashboard");
     }
-  }, [access_token]);
+  }, [isAuthenticated]);
 
   return (
     <Box
       sx={{
-        backgroundColor: "#f9f9f9",
+        backgroundColor: " #f0f0fa",
         flex: 1,
         height: "100vh",
         pl: { xs: 2, sm: 5, md: 2 },

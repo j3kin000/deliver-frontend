@@ -5,12 +5,16 @@ const baseURL =
     ? process.env.REACT_APP_DEV_BASE_URL
     : process.env.REACT_APP_PROD_BASE_URL;
 
-const apiClient = axios.create({ baseURL });
+const apiClient = axios.create({
+  baseURL,
+  withCredentials: true, // Set credentials to 'include'
+});
 
 apiClient.interceptors.request.use(
   async (request) => {
     if (process.env.NODE_ENV === "development") {
-      // const KEY = getData('authorization')
+      const authorization = localStorage.getItem("access_token");
+      request.headers.setAuthorization(`Bearer ${authorization}`);
       console.log("requestId", request.headers.requestId);
       console.log("request.method", request.method);
       if (request?.baseURL)
@@ -51,7 +55,7 @@ apiClient.interceptors.response.use(
     if (process.env.NODE_ENV === "development") {
       console.log("request.error", error);
     }
-    return Promise.reject(error.response.data.message);
+    return Promise.reject(error?.response?.data?.message);
   }
 );
 

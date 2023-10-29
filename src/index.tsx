@@ -7,7 +7,7 @@ import { CssBaseline } from "@mui/material";
 import { useMode } from "./utils/theme";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import { ColorModeContextProvider } from "./contexts/ColorModeContext/ColorModeContext";
-import { AppContextProvider } from "./contexts/AooContext.tsx/AppContext";
+import { AppContextProvider } from "./contexts/AppContext.tsx/AppContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,17 +16,12 @@ const root = ReactDOM.createRoot(
 //put provider here if you want to use redux
 
 const Root = () => {
-  const [theme] = useMode();
-
   return (
     <React.StrictMode>
       <ColorModeContextProvider>
         <AppContextProvider>
           <BrowserRouter>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <App />
-            </ThemeProvider>
+            <App />
           </BrowserRouter>
         </AppContextProvider>
       </ColorModeContextProvider>

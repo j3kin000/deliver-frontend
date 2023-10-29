@@ -7,10 +7,12 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
+  useTheme,
 } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SidebarItem from "./SidebarItem";
+import { tokens } from "../../utils/theme";
 
 type Props = {
   item: RouteType;
@@ -18,12 +20,14 @@ type Props = {
 
 const SidebarItemCollapse: FC<Props> = ({ item }) => {
   const [open, setOpen] = useState(false);
+  const theme = useTheme();
+  const color = tokens(theme.palette.mode);
   return item.sidebarProps ? (
     <>
       <ListItemButton
         onClick={() => setOpen(!open)}
         sx={{
-          "&:hover": { backgroundColor: "green" },
+          "&:hover": { color: color.orange[500] },
           paddingY: "12px",
           paddingX: " 24px",
         }}
@@ -43,15 +47,15 @@ const SidebarItemCollapse: FC<Props> = ({ item }) => {
       </ListItemButton>
       <Collapse in={open} timeout={"auto"}>
         <List>
-          {item?.children?.map((route, index) =>
-            route.sidebarProps ? (
+          {item?.children?.map((route, index) => {
+            return route.sidebarProps ? (
               route.children ? (
                 <SidebarItemCollapse item={route} key={index} />
               ) : (
                 <SidebarItem item={route} key={index} />
               )
-            ) : null
-          )}
+            ) : null;
+          })}
         </List>
       </Collapse>
     </>

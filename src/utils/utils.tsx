@@ -15,7 +15,7 @@ export const useScreenSize = () => {
   const issmallscreen = useMediaQuery(theme.breakpoints.down("sm"));
   const ismediumscreen = useMediaQuery(theme.breakpoints.down("md"));
   const islargescreen = useMediaQuery(theme.breakpoints.down("lg"));
-
+  console.log("ismediumscreen", ismediumscreen);
   return { issmallscreen, ismediumscreen, islargescreen };
 };
 

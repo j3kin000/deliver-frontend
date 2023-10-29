@@ -30,7 +30,7 @@ export const tokens = (mode: ModeType) => ({
           800: "#662114",
           900: "#33110a",
         },
-        secondary: {
+        grey: {
           100: "#e0e0e0",
           200: "#c2c2c2",
           300: "#a3a3a3",
@@ -40,6 +40,17 @@ export const tokens = (mode: ModeType) => ({
           700: "#3d3d3d",
           800: "#292929",
           900: "#141414",
+        },
+        white: {
+          100: "#fcfcfe",
+          200: "#f9f9fd",
+          300: "#f6f6fc",
+          400: "#f3f3fb",
+          500: "#f0f0fa",
+          600: "#c0c0c8",
+          700: "#909096",
+          800: "#606064",
+          900: "#303032",
         },
       }
     : {
@@ -65,7 +76,7 @@ export const tokens = (mode: ModeType) => ({
           200: "#662114",
           100: "#33110a",
         },
-        secondary: {
+        grey: {
           900: "#e0e0e0",
           800: "#c2c2c2",
           700: "#a3a3a3",
@@ -76,13 +87,23 @@ export const tokens = (mode: ModeType) => ({
           200: "#292929",
           100: "#141414",
         },
+        white: {
+          900: "#fcfcfe",
+          800: "#f9f9fd",
+          700: "#f6f6fc",
+          600: "#f3f3fb",
+          500: "#f0f0fa",
+          400: "#c0c0c8",
+          300: "#909096",
+          200: "#606064",
+          100: "#303032",
+        },
       }),
 });
 
 // mui theme settings
 export const themeSettings = (mode: ModeType): ThemeOptions => {
   const colors = tokens(mode);
-
   return {
     palette: {
       mode: mode,
@@ -96,7 +117,13 @@ export const themeSettings = (mode: ModeType): ThemeOptions => {
               main: colors.orange[500],
             },
             secondary: {
-              main: colors.secondary[500],
+              main: colors.grey[500],
+            },
+            background: {
+              default: "#f0f0fa",
+            },
+            sidebar: {
+              default: "#f0f0fa",
             },
             // neutral: {
             //   dark: colors.grey[700],
@@ -113,10 +140,16 @@ export const themeSettings = (mode: ModeType): ThemeOptions => {
               main: colors.primary[100],
             },
             orange: {
-              main: colors.secondary[100],
+              main: colors.grey[100],
             },
             secondary: {
-              main: colors.secondary[100],
+              main: colors.grey[100],
+            },
+            background: {
+              default: colors.white[100],
+            },
+            sidebar: {
+              background: "#272627",
             },
             // neutral: {
             //   dark: colors.grey[700],
@@ -176,13 +209,16 @@ export const useMode = () => {
   const [mode, setMode] = useState<PaletteMode>("light");
   const colorMode: ColorModeType = useMemo(
     () => ({
-      toggleColorMode: () =>
-        setMode((prev) => (prev === "light" ? "dark" : "light")),
+      toggleColorMode: () => {
+        setMode((prev) => (prev === "light" ? "dark" : "light"));
+      },
     }),
-    []
+    [mode]
   );
-
-  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const theme = useMemo(
+    () => createTheme(themeSettings(mode)),
+    [setMode, mode]
+  );
 
   return [theme, colorMode] as const;
 };

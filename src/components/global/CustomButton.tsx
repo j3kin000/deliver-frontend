@@ -30,7 +30,7 @@ const CustomButton: FC<CustomButtonProps> = memo(
             width: "150px",
             marginBottom: "10px",
             "&:disabled": {
-              backgroundColor: "#ffddd6", // Change to your desired background color
+              backgroundColor: "#ffddd6",
             },
           }}
           disabled={isDisabled}
@@ -39,7 +39,7 @@ const CustomButton: FC<CustomButtonProps> = memo(
             <CircularProgress
               size={24}
               sx={{
-                color: "green",
+                color: "#ff5331",
               }}
             />
           )}

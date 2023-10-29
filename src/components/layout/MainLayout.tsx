@@ -1,14 +1,17 @@
-import { Box, Toolbar, styled } from "@mui/material";
-import React, { useCallback, useContext, useEffect } from "react";
+import { Box, Toolbar, styled, useTheme } from "@mui/material";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import Topbar from "../global/Topbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar, { DrawerHeader } from "../global/Sidebar";
 import { drawerWidth, useScreenSize } from "../../utils/utils";
-import { AppContext } from "../../contexts/AooContext.tsx/AppContext";
+import { AppContext } from "../../contexts/AppContext.tsx/AppContext";
+import { tokens } from "../../utils/theme";
+import { checkAuth } from "../../api/endpoint";
+import useAuthentication from "../../utils/hooks/IsAuthenticated";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
-  ismediumscreen?: boolean;
+  ismediumscreen?: number;
 }>(({ theme, open, ismediumscreen }) => ({
   flexGrow: 1,
   padding: theme.spacing(3),
@@ -27,33 +30,40 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
 }));
 
 const MainLayout = () => {
-  const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
   const { ismediumscreen } = useScreenSize();
   const { access_token } = useContext(AppContext);
-  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const isAuthenticated = useAuthentication();
 
   useEffect(() => {
-    if (!access_token) {
+    if (!isAuthenticated) {
       navigate("/login");
     }
-  }, [access_token]);
+  }, [isAuthenticated]);
 
   const handleDrawer = useCallback(() => {
     setOpen(!open);
   }, [open]);
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box
+      sx={{
+        display: "flex",
+        height: "100vh",
+        backgroundColor: "background.default",
+      }}
+    >
       <Topbar
         open={open}
         handleDrawer={handleDrawer}
-        ismediumscreen={ismediumscreen}
+        ismediumscreen={ismediumscreen ? 1 : 0}
       />
       <Sidebar
         open={open}
         handleDrawer={handleDrawer}
-        ismediumscreen={ismediumscreen}
+        ismediumscreen={ismediumscreen ? 1 : 0}
       />
-      <Main open={open} ismediumscreen={ismediumscreen}>
+      <Main open={open} ismediumscreen={ismediumscreen ? 1 : 0}>
         {/* <Toolbar /> */}
         <DrawerHeader />
         <Outlet />

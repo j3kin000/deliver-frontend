@@ -14,12 +14,11 @@ const AppReducer = (
 ) => {
   switch (action.type) {
     case "LOGIN":
-      console.log("logged in dispatc", action);
       return {
         ...state,
         access_token: action.payload,
       };
-    case "RESET_SEARCH":
+    case "LOGOUT":
       return INITAL_STATE;
     default:
       return state;
