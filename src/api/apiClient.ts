@@ -12,14 +12,17 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   async (request) => {
-    if (process.env.NODE_ENV === "development") {
-      const authorization = localStorage.getItem("access_token");
+    const authorization = localStorage.getItem("access_token");
+    if (authorization != "null") {
       request.headers.setAuthorization(`Bearer ${authorization}`);
-      console.log("requestId", request.headers.requestId);
+    } else {
+      delete request.headers["Authorization"];
+    }
+    if (process.env.NODE_ENV === "development") {
+      console.log("requestId", request.headers);
       console.log("request.method", request.method);
       if (request?.baseURL)
         console.log("request.url", request?.baseURL + request?.url);
-
       console.log("request.data", JSON.stringify(request.data));
       console.log("request.headers", JSON.stringify(request.headers));
     }
@@ -34,7 +37,7 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   async (response) => {
     // const KEY = getData('authorization')
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV !== "development") {
       console.log("requestId", response.config.headers.requestId);
       console.log("response.headers", JSON.stringify(response.headers));
       console.log(
@@ -48,10 +51,6 @@ apiClient.interceptors.response.use(
     return response;
   },
   async (error) => {
-    if (error?.response?.status === 401) {
-      //to be change
-      console.log("Invalid Authorisaction");
-    }
     if (process.env.NODE_ENV === "development") {
       console.log("request.error", error);
     }

@@ -6,9 +6,11 @@ import LoginForm, { InitValuesType } from "../../components/login/LoginForm";
 import { FormikHelpers } from "formik";
 import { login } from "../../api/endpoint";
 import { AppContext } from "../../contexts/AppContext.tsx/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { dispatch } = useContext(AppContext);
+  const navigate = useNavigate();
   const handleFormSubmit = async (
     values: InitValuesType,
     actions: FormikHelpers<InitValuesType>
@@ -20,6 +22,7 @@ const Login = () => {
       if (response.success) {
         dispatch({ type: "LOGIN", payload: response.data.access_token });
         localStorage.setItem("access_token", response.data.access_token);
+        navigate("/");
       }
     } catch (error) {
       actions.setErrors({

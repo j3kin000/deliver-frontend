@@ -16,7 +16,6 @@ const useAuthentication = () => {
       } catch (error) {
         localStorage.removeItem("access_token");
         setIsAuthenticated(false);
-        console.log("ERRORRRRR", isAuthenticated);
       }
     };
 

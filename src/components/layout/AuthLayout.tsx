@@ -1,22 +1,40 @@
 import { Box } from "@mui/material";
-import React, { FC, ReactNode, useContext, useEffect } from "react";
+import React, { FC, ReactNode, useContext, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { AppContext } from "../../contexts/AppContext.tsx/AppContext";
-import useAuthentication from "../../utils/hooks/IsAuthenticated";
+import { checkAuth } from "../../api/endpoint";
 
 export type AuthLayoutProps = {
   children?: ReactNode;
 };
 const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
   const navigate = useNavigate();
-  const isAuthenticated = useAuthentication();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/dashboard");
-    }
-  }, [isAuthenticated]);
+    const fetchAuth = async () => {
+      setLoading(true);
 
+      try {
+        const response = await checkAuth(); // Replace with your authentication check logic
+        console.log("response.success", response);
+        if (response.success) {
+          setLoading(false);
+          navigate("/dashboard");
+          return;
+        }
+      } catch (error) {
+        localStorage.removeItem("access_token");
+        console.log("ERRORRRRR", error);
+      }
+      setLoading(false);
+    };
+
+    fetchAuth();
+  }, []);
+  if (loading) {
+    return <></>;
+  }
   return (
     <Box
       sx={{

@@ -1,5 +1,11 @@
 import { Box, Toolbar, styled, useTheme } from "@mui/material";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {
+  Fragment,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import Topbar from "../global/Topbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar, { DrawerHeader } from "../global/Sidebar";
@@ -7,7 +13,6 @@ import { drawerWidth, useScreenSize } from "../../utils/utils";
 import { AppContext } from "../../contexts/AppContext.tsx/AppContext";
 import { tokens } from "../../utils/theme";
 import { checkAuth } from "../../api/endpoint";
-import useAuthentication from "../../utils/hooks/IsAuthenticated";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
@@ -32,19 +37,34 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
 const MainLayout = () => {
   const navigate = useNavigate();
   const { ismediumscreen } = useScreenSize();
-  const { access_token } = useContext(AppContext);
   const [open, setOpen] = useState(false);
-  const isAuthenticated = useAuthentication();
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-  }, [isAuthenticated]);
+    const fetchAuth = async () => {
+      setLoading(true);
+      try {
+        const response = await checkAuth(); // Replace with your authentication check logic
+        if (!response.success) {
+          console.log("response.success", response);
+          navigate("/login");
+          setLoading(false);
+          return;
+        }
+      } catch (error) {
+        console.log("ERRORRRRR", error);
+        localStorage.removeItem("access_token");
+        navigate("/login");
+      }
+      setLoading(false);
+    };
+
+    fetchAuth();
+  }, []);
 
   const handleDrawer = useCallback(() => {
     setOpen(!open);
   }, [open]);
+
   return (
     <Box
       sx={{
@@ -53,21 +73,25 @@ const MainLayout = () => {
         backgroundColor: "background.default",
       }}
     >
-      <Topbar
-        open={open}
-        handleDrawer={handleDrawer}
-        ismediumscreen={ismediumscreen ? 1 : 0}
-      />
-      <Sidebar
-        open={open}
-        handleDrawer={handleDrawer}
-        ismediumscreen={ismediumscreen ? 1 : 0}
-      />
-      <Main open={open} ismediumscreen={ismediumscreen ? 1 : 0}>
-        {/* <Toolbar /> */}
-        <DrawerHeader />
-        <Outlet />
-      </Main>
+      {!loading && (
+        <>
+          <Topbar
+            open={open}
+            handleDrawer={handleDrawer}
+            ismediumscreen={ismediumscreen ? 1 : 0}
+          />
+          <Sidebar
+            open={open}
+            handleDrawer={handleDrawer}
+            ismediumscreen={ismediumscreen ? 1 : 0}
+          />
+          <Main open={open} ismediumscreen={ismediumscreen ? 1 : 0}>
+            {/* <Toolbar /> */}
+            <DrawerHeader />
+            <Outlet />
+          </Main>
+        </>
+      )}
     </Box>
   );
 };

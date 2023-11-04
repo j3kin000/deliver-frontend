@@ -16,6 +16,8 @@ import SidebarItem from "./SidebarItem";
 import { tokens } from "../../utils/theme";
 import { logout } from "../../api/endpoint";
 import { AppContext } from "../../contexts/AppContext.tsx/AppContext";
+import { useNavigate } from "react-router-dom";
+import { ColorModeContext } from "../../contexts/ColorModeContext/ColorModeContext";
 
 export const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -32,18 +34,22 @@ type SidebarProps = {
 };
 const Sidebar: FC<SidebarProps> = ({ open, ismediumscreen, handleDrawer }) => {
   const { dispatch } = useContext(AppContext);
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const { colorMode } = useContext(ColorModeContext);
   const handleLogout = async () => {
-    console.log("logging out");
     try {
       const response = await logout();
       console.log("data", response);
       if (response.success) {
         dispatch({ type: "LOGOUT", payload: "" });
-        console.log("Access_token", localStorage.getItem("access_token"));
         localStorage.removeItem("access_token");
+        if (theme.palette.mode === "dark") {
+          colorMode?.toggleColorMode();
+        }
+        navigate("/");
         return;
       }
-      console.log("throw new error");
     } catch (error) {
       console.log((error as string) || "Network failed!");
     }
