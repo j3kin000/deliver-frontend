@@ -4,8 +4,8 @@ const SuspenseLoader = () => {
   return (
     <Box
       display={"flex"}
-      height={"100%"}
-      width={"100%"}
+      height={"100vh"} // 100% of viewport height
+      width={"100%"} // 100% of viewport width
       alignItems={"center"}
       justifyContent={"center"}
     >

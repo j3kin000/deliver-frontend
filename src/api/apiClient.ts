@@ -18,14 +18,14 @@ apiClient.interceptors.request.use(
     } else {
       delete request.headers["Authorization"];
     }
-    if (process.env.NODE_ENV === "development") {
-      console.log("requestId", request.headers);
-      console.log("request.method", request.method);
-      if (request?.baseURL)
-        console.log("request.url", request?.baseURL + request?.url);
-      console.log("request.data", JSON.stringify(request.data));
-      console.log("request.headers", JSON.stringify(request.headers));
-    }
+    // if (process.env.NODE_ENV === "development") {
+    //   console.log("requestId", request.headers);
+    //   console.log("request.method", request.method);
+    //   if (request?.baseURL)
+    //     console.log("request.url", request?.baseURL + request?.url);
+    //   console.log("request.data", JSON.stringify(request.data));
+    //   console.log("request.headers", JSON.stringify(request.headers));
+    // }
     return request;
   },
   async (error) => {
@@ -36,17 +36,16 @@ apiClient.interceptors.request.use(
 
 apiClient.interceptors.response.use(
   async (response) => {
-    // const KEY = getData('authorization')
-    if (process.env.NODE_ENV !== "development") {
-      console.log("requestId", response.config.headers.requestId);
-      console.log("response.headers", JSON.stringify(response.headers));
-      console.log(
-        "response.request.headers",
-        JSON.stringify(response.config.headers)
-      );
-      console.log("response.status", response.status);
-      console.log("response.data", JSON.stringify(response.data));
-    }
+    // if (process.env.NODE_ENV === "development") {
+    //   console.log("requestId", response.config.headers.requestId);
+    //   console.log("response.headers", JSON.stringify(response.headers));
+    //   console.log(
+    //     "response.request.headers",
+    //     JSON.stringify(response.config.headers)
+    //   );
+    //   console.log("response.status", response.status);
+    //   console.log("response.data", JSON.stringify(response.data));
+    // }
 
     return response;
   },

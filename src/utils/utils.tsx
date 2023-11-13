@@ -19,4 +19,8 @@ export const useScreenSize = () => {
   return { issmallscreen, ismediumscreen, islargescreen };
 };
 
-export const drawerWidth = 240; // Replace with the actual drawer width
+export const drawerWidth = 255; // Replace with the actual drawer width
+
+export const capitalizeFirstLetter = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { memo, useContext } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -38,60 +38,60 @@ type TopbarProps = {
   handleDrawer: () => void;
   ismediumscreen: number;
 };
-const Topbar: React.FC<TopbarProps> = ({
-  open,
-  ismediumscreen,
-  handleDrawer,
-}) => {
-  const theme = useTheme();
-  const { colorMode } = useContext(ColorModeContext);
-  return (
-    <AppBar
-      position="fixed"
-      open={open}
-      color="inherit"
-      ismediumscreen={ismediumscreen}
-      sx={{
-        boxShadow: "none",
-        borderBottom: "1px solid rgba(0,0,0,.1)",
-      }}
-    >
-      <Toolbar
+const Topbar: React.FC<TopbarProps> = memo(
+  ({ open, ismediumscreen, handleDrawer }) => {
+    const theme = useTheme();
+    const { colorMode } = useContext(ColorModeContext);
+    return (
+      <AppBar
+        position="fixed"
+        open={open}
+        color="inherit"
+        ismediumscreen={ismediumscreen}
         sx={{
-          display: "flex",
-          justifyContent: "space-between",
+          boxShadow: "none",
+          borderBottom: "1px solid rgba(0,0,0,.1)",
+          height: "76px",
         }}
       >
-        <Box display={"flex"}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawer}
-            edge="start"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Box>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            height: "76px",
+          }}
+        >
+          <Box display={"flex"}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawer}
+              edge="start"
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
 
-        <Box display={"flex"}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={colorMode?.toggleColorMode}
-            edge="start"
-            sx={{ mr: 2 }}
-          >
-            {theme.palette.mode === "dark" ? (
-              <DarkModeOutlinedIcon />
-            ) : (
-              <LightModeOutlinedIcon />
-            )}
-          </IconButton>
-        </Box>
-      </Toolbar>
-    </AppBar>
-  );
-};
+          <Box display={"flex"}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={colorMode?.toggleColorMode}
+              edge="start"
+              sx={{ mr: 2 }}
+            >
+              {theme.palette.mode === "dark" ? (
+                <DarkModeOutlinedIcon />
+              ) : (
+                <LightModeOutlinedIcon />
+              )}
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+    );
+  }
+);
 
 export default Topbar;

@@ -162,8 +162,8 @@ export const themeSettings = (mode: ModeType): ThemeOptions => {
           }),
     },
     typography: {
-      fontFamily: ["Source Sans 3", "sans-serif"].join(","),
-      fontSize: 14,
+      // fontFamily: ["Source Sans 3", "sans-serif"].join(","),
+      fontSize: 13,
       h1: {
         fontFamily: ["Source Sans 3", "sans-serif"].join(","),
         fontSize: 50,
@@ -186,7 +186,7 @@ export const themeSettings = (mode: ModeType): ThemeOptions => {
       },
       h6: {
         fontFamily: ["Source Sans 3", "sans-serif"].join(","),
-        fontSize: 24,
+        fontSize: 14,
       },
     },
     breakpoints: {

@@ -67,7 +67,7 @@ const LoginForm: FC<LoginFormProps> = ({ handleFormSubmit }) => {
                 error={errors.password}
               />
               <Box>
-                <CustomButton label="submit" isDisabled={isSubmitting} />
+                <CustomButton label="Login" isDisabled={isSubmitting} />
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                   <Link
                     to={"/forgot-password"}

@@ -17,15 +17,15 @@ const root = ReactDOM.createRoot(
 
 const Root = () => {
   return (
-    <React.StrictMode>
-      <ColorModeContextProvider>
-        <AppContextProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </AppContextProvider>
-      </ColorModeContextProvider>
-    </React.StrictMode>
+    // <React.StrictMode>
+    <ColorModeContextProvider>
+      <AppContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </AppContextProvider>
+    </ColorModeContextProvider>
+    // </React.StrictMode>
   );
 };
 root.render(<Root />);

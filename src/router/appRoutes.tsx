@@ -8,6 +8,7 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import RequestPageIcon from "@mui/icons-material/RequestPage";
 import PersonIcon from "@mui/icons-material/Person";
 import SettingsIcon from "@mui/icons-material/Settings";
+import ProductView from "../pages/menu/product-view";
 export const Status404 = Loader(
   lazy(() => import("../pages/status404/Status404"))
 );
@@ -57,15 +58,19 @@ export const appRoutes: RouteType[] = [
         path: "/menu/product-list",
         state: "menu.index",
         sidebarProps: {
-          displayText: "Menu List",
+          displayText: "Product List",
         },
       },
       {
         element: <ProductAdd />,
         path: "/menu/product-add",
         sidebarProps: {
-          displayText: "Add Menu",
+          displayText: "Add Product",
         },
+      },
+      {
+        element: <ProductView />,
+        path: "/menu/:prodId", // Dynamic route with a parameter
       },
     ],
   },
@@ -119,14 +124,14 @@ export const appRoutes: RouteType[] = [
         path: "/menu/agentt-list",
         state: "menu.index",
         sidebarProps: {
-          displayText: "Menu List",
+          displayText: "Agent List",
         },
       },
       {
         element: <AgentAdd />,
         path: "/menu/agent-add",
         sidebarProps: {
-          displayText: "Add Menu",
+          displayText: "Add Agent",
         },
       },
     ],
