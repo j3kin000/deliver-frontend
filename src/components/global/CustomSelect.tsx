@@ -6,7 +6,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { CSSProperties, ChangeEvent, FC } from "react";
+import { CSSProperties, FC } from "react";
 import { tokens } from "../../utils/theme";
 
 export type CustomSelectProps = {
@@ -28,10 +28,6 @@ const CustomSelect: FC<CustomSelectProps> = ({
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const onHandleChange = (event: SelectChangeEvent) => {
-    console.log("event select", event);
-    handleChange(event);
-  };
   return (
     <FormControl
       sx={{

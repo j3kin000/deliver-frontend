@@ -12,8 +12,11 @@ import { uploadImage } from "../../utils/helper/uploadImage";
 import CustomModalLoader from "../../components/global/CustomModalLoader";
 import { addProduct } from "../../api/endpoint";
 import { initialProductValue } from "../../utils/constants/constants";
+import { useNavigate } from "react-router-dom";
 
 const ProductAdd = () => {
+  const navigate = useNavigate();
+
   const initialValues: InitValuesMenuType = initialProductValue;
   const [alert, setAlert] = useState<CustomAlertProps>({
     type: "",
@@ -44,13 +47,16 @@ const ProductAdd = () => {
       const imageUrls = await uploadImages(prodImg);
       params.prodImg = imageUrls;
 
-      const response = await addProduct(params);
+      await addProduct(params);
       setLoading(false);
       setCollapse(true);
       setAlert({
         type: "success",
         message: "Succefully Added to the product list",
       });
+      setTimeout(() => {
+        navigate("/menu/product-list");
+      }, 3000);
     } catch (error) {
       setLoading(false);
       setCollapse(true);

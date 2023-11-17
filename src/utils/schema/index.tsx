@@ -1,4 +1,3 @@
-import { isString } from "formik";
 import * as yup from "yup";
 
 export const loginSchema = yup.object().shape({
@@ -46,6 +45,22 @@ export const productSchema = yup.object().shape({
   status: yup.boolean().required("This field is required"),
 });
 
+export const agentSchema = yup.object().shape({
+  firstName: yup
+    .string()
+    .required("This field is required")
+    .matches(/^[a-zA-Z\s]+$/, "Invalid First Name"),
+  lastName: yup
+    .string()
+    .required("This field is required")
+    .matches(/^[a-zA-Z\s]+$/, "Invalid First Name"),
+  email: yup.string().email("Invalid email").required("This field is required"),
+  phoneNumber: yup
+    .string()
+    .required("This field is required")
+    .matches(/^(09|\+639)\d{9}$/, "Phone Number is not valid"),
+  branch: yup.string().required("This field is required"),
+});
 export type InitValuesMenuType = {
   prodName: string;
   category: string;

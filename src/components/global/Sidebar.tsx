@@ -1,19 +1,10 @@
-import {
-  Avatar,
-  Divider,
-  Drawer,
-  List,
-  ListItemButton,
-  styled,
-  useTheme,
-} from "@mui/material";
+import { Divider, Drawer, List, styled, useTheme } from "@mui/material";
 import { FC, useContext } from "react";
 import { appRoutes } from "../../router/appRoutes";
 import { drawerWidth } from "../../utils/utils";
 import DeliveryLogo from "./DeliveryLogo";
 import SidebarItemCollapse from "./SidebarItemCollapse";
 import SidebarItem from "./SidebarItem";
-import { tokens } from "../../utils/theme";
 import { logout } from "../../api/endpoint";
 import { AppContext } from "../../contexts/AppContext.tsx/AppContext";
 import { useNavigate } from "react-router-dom";

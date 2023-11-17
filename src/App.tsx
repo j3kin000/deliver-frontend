@@ -1,7 +1,6 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Router from "./router/Router";
-import { useMode } from "./utils/theme";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { ColorModeContext } from "./contexts/ColorModeContext/ColorModeContext";
 
 const App = () => {

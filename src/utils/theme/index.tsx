@@ -213,12 +213,9 @@ export const useMode = () => {
         setMode((prev) => (prev === "light" ? "dark" : "light"));
       },
     }),
-    [mode]
+    []
   );
-  const theme = useMemo(
-    () => createTheme(themeSettings(mode)),
-    [setMode, mode]
-  );
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
   return [theme, colorMode] as const;
 };

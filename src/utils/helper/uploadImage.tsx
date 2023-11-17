@@ -1,5 +1,4 @@
-import { doc, getFirestore, updateDoc } from "firebase/firestore";
-import { app, storage } from "../../firebase-config";
+import { storage } from "../../firebase-config";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 export const uploadImage = async (item: any) => {

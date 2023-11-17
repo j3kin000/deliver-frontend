@@ -3,9 +3,6 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
-import { CssBaseline } from "@mui/material";
-import { useMode } from "./utils/theme";
-import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import { ColorModeContextProvider } from "./contexts/ColorModeContext/ColorModeContext";
 import { AppContextProvider } from "./contexts/AppContext.tsx/AppContext";
 

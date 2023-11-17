@@ -1,5 +1,5 @@
 import { Alert, Box, Collapse } from "@mui/material";
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect } from "react";
 
 export type CustomAlertProps = {
   type: "success" | "error" | "info" | "warning" | "";
@@ -19,7 +19,7 @@ const CustomAlert: FC<CustomAlertProps> = ({
     }, 10000);
 
     return () => clearTimeout(collpasing);
-  }, [collapse]);
+  }, [collapse, setCollapse]);
 
   return (
     <Box width={"100%"}>

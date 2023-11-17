@@ -8,7 +8,6 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import RequestPageIcon from "@mui/icons-material/RequestPage";
 import PersonIcon from "@mui/icons-material/Person";
 import SettingsIcon from "@mui/icons-material/Settings";
-import ProductView from "../pages/menu/product-view";
 export const Status404 = Loader(
   lazy(() => import("../pages/status404/Status404"))
 );
@@ -16,10 +15,14 @@ export const Login = Loader(lazy(() => import("../pages/login/Login")));
 const Dashboard = Loader(lazy(() => import("../pages/dashboard/Dashboard")));
 const ProductList = Loader(lazy(() => import("../pages/menu/product-list")));
 const ProductAdd = Loader(lazy(() => import("../pages/menu/product-add")));
+const ProductView = Loader(lazy(() => import("../pages/menu/product-view")));
+
 const Order = Loader(lazy(() => import("../pages/order/order")));
 const Request = Loader(lazy(() => import("../pages/request/request")));
 const AgentList = Loader(lazy(() => import("../pages/agent/agent-list")));
 const AgentAdd = Loader(lazy(() => import("../pages/agent/agent-add")));
+const AgentView = Loader(lazy(() => import("../pages/agent/agent-view")));
+
 const Settings = Loader(lazy(() => import("../pages/settings/settings")));
 
 export const appRoutes: RouteType[] = [
@@ -121,18 +124,22 @@ export const appRoutes: RouteType[] = [
       {
         index: true,
         element: <AgentList />,
-        path: "/menu/agentt-list",
-        state: "menu.index",
+        path: "/agent/agent-list",
+        state: "agent.index",
         sidebarProps: {
           displayText: "Agent List",
         },
       },
       {
         element: <AgentAdd />,
-        path: "/menu/agent-add",
+        path: "/agent/agent-add",
         sidebarProps: {
           displayText: "Add Agent",
         },
+      },
+      {
+        element: <AgentView />,
+        path: "/agent/:agentId", // Dynamic route with a parameter
       },
     ],
   },

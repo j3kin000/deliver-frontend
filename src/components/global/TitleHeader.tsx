@@ -1,5 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import React, { FC, Fragment, useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import { Location } from "react-router-dom";
 import { capitalizeFirstLetter } from "../../utils/utils";
 import { tokens } from "../../utils/theme";

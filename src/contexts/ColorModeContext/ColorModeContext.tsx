@@ -1,6 +1,6 @@
 import { FC, ReactNode, createContext } from "react";
 import { ColorModeType, useMode } from "../../utils/theme";
-import { Theme, useTheme } from "@mui/material";
+import { Theme } from "@mui/material";
 
 export type ColorModeProviderProps = {
   children: ReactNode;

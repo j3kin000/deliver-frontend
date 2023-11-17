@@ -41,3 +41,28 @@ export const deleteProduct = async (id: string) => {
   const response = await apiClient.delete(`api/v1/products/${id}`, {});
   return response?.data;
 };
+
+export const getAllUser = async () => {
+  const response = await apiClient.get("api/v1/users", {});
+  return response?.data;
+};
+
+export const getUser = async (id: string) => {
+  const response = await apiClient.get(`api/v1/users/${id}`, {});
+  return response?.data;
+};
+
+export const addAgent = async (params: any) => {
+  const response = await apiClient.post("api/v1/auth/register", params, {});
+  return response?.data;
+};
+
+export const updateAgent = async (id: string, params: any) => {
+  const response = await apiClient.patch(`api/v1/users/${id}`, params);
+  return response?.data;
+};
+
+export const deleteAgent = async (id: string) => {
+  const response = await apiClient.delete(`api/v1/users/${id}`, {});
+  return response?.data;
+};

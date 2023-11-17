@@ -4,11 +4,8 @@ import {
   InputAdornment,
   InputBase,
   Typography,
-  useTheme,
 } from "@mui/material";
-import { FormikTouched } from "formik";
 import React, { CSSProperties, ChangeEvent, FC, memo } from "react";
-import { InitValuesType } from "../login/LoginForm";
 
 export type CustomTextInputProps = {
   placeholder?: string;

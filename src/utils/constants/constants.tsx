@@ -10,7 +10,14 @@ export const initialProductValue = {
   status: true,
   // isDiscountActive: false,
 };
-export const tableHeader: columnDataProps[] = [
+export const initialAgentValue = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phoneNumber: "",
+  branch: "Main",
+};
+export const productTableHeader: columnDataProps[] = [
   {
     id: "prodId",
     name: "Product Id ",
@@ -38,6 +45,39 @@ export const tableHeader: columnDataProps[] = [
   {
     id: "price",
     name: "Price",
+    enableSort: true,
+    align: "center",
+  },
+];
+
+export const agentTableHeader: columnDataProps[] = [
+  {
+    id: "agentId",
+    name: "Agent Id ",
+    enableSort: true,
+    align: "center",
+  },
+  {
+    id: "name",
+    name: "Full Name",
+    enableSort: true,
+    align: "center",
+  },
+  {
+    id: "email",
+    name: "Email",
+    enableSort: true,
+    align: "center",
+  },
+  {
+    id: "branch",
+    name: "Branch",
+    enableSort: true,
+    align: "center",
+  },
+  {
+    id: "phoneNumber",
+    name: "Phone Number",
     enableSort: true,
     align: "center",
   },

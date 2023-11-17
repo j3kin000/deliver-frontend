@@ -6,7 +6,6 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { drawerWidth } from "../../utils/utils";
 import { Box } from "@mui/material";
-import { tokens } from "../../utils/theme";
 import { ColorModeContext } from "../../contexts/ColorModeContext/ColorModeContext";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";

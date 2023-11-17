@@ -3,7 +3,6 @@ import { columnDataProps } from "./CustomTable";
 import {
   TableCell,
   TableHead,
-  TableRow,
   TableSortLabel,
   Typography,
 } from "@mui/material";

@@ -1,14 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Settings = () => {
-  const [text, setText] = useState("");
-  return (
-    <div>
-      <div>
-        <input type="text" onChange={(e) => setText(e.target.value)} />
-      </div>
-    </div>
-  );
+const settings = () => {
+  return <div>settings</div>;
 };
 
-export default Settings;
+export default settings;

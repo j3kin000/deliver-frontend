@@ -7,7 +7,6 @@ import { drawerWidth, useScreenSize } from "../../utils/utils";
 import { checkAuth } from "../../api/endpoint";
 import { useLocation } from "react-router-dom";
 import TitleHeader from "../global/TitleHeader";
-import CustomModalLoader from "../global/CustomModalLoader";
 import SuspenseLoader from "../router/SuspenseLoader";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
@@ -42,8 +41,9 @@ const MainLayout = () => {
       setLoading(true);
       try {
         const response = await checkAuth(); // Replace with your authentication check logic
-        if (!response.success) {
-          console.log("response.success", response);
+
+        if (!response.data.isAdmin) {
+          console.log("lol", response);
           navigate("/login");
           setLoading(false);
           return;

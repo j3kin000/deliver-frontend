@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
-import React, { FC, ReactNode, useContext, useEffect, useState } from "react";
+import React, { FC, ReactNode, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { AppContext } from "../../contexts/AppContext.tsx/AppContext";
 import { checkAuth } from "../../api/endpoint";
 
 export type AuthLayoutProps = {
@@ -14,11 +13,10 @@ const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
   useEffect(() => {
     const fetchAuth = async () => {
       setLoading(true);
-
       try {
-        const response = await checkAuth(); // Replace with your authentication check logic
+        const response = await checkAuth();
         console.log("response.success", response);
-        if (response.success) {
+        if (response.data.isAdmin) {
           setLoading(false);
           navigate("/dashboard");
           return;

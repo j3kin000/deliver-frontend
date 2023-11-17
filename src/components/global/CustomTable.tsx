@@ -1,28 +1,17 @@
 import {
   Box,
-  Divider,
-  FormControl,
-  MenuItem,
   Pagination,
-  PaginationItem,
   Paper,
-  Select,
   SelectChangeEvent,
   Table,
   TableBody,
   TableCell,
   TableContainer,
-  TableFooter,
-  TablePagination,
   TableRow,
   Typography,
-  useTheme,
 } from "@mui/material";
 import { ChangeEvent, FC, Fragment, useEffect, useMemo, useState } from "react";
 import CustomTableHead, { OrderType } from "./CustomTableHead";
-import { tokens } from "../../utils/theme";
-import CustomTextInput from "./CustomTextInput";
-import CustomSelect from "./CustomSelect";
 import CustomTableSort from "./CustomTableSort";
 import { useNavigate } from "react-router-dom";
 
@@ -35,6 +24,7 @@ export type columnDataProps = {
 export type CustomTableProps = {
   rows: any[] | undefined;
   columnData: columnDataProps[];
+  type: string;
 };
 
 const initialColumnData: columnDataProps[] = [
@@ -71,7 +61,7 @@ function stableSort<T>(array: T[], comparator: (a: T, b: T) => number): T[] {
   return stabilizedThis.map((el) => el[0]);
 }
 
-const CustomTable: FC<CustomTableProps> = ({ rows, columnData }) => {
+const CustomTable: FC<CustomTableProps> = ({ rows, columnData, type }) => {
   const navigate = useNavigate();
   const [internalColumnData, setInternalColumnData] =
     useState<columnDataProps[]>(initialColumnData);
@@ -105,7 +95,7 @@ const CustomTable: FC<CustomTableProps> = ({ rows, columnData }) => {
     headerData = columnData;
 
     setInternalColumnData(headerData);
-  }, [columnData]);
+  }, [columnData, rows]);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -173,23 +163,38 @@ const CustomTable: FC<CustomTableProps> = ({ rows, columnData }) => {
                           key={index + Math.floor(Math.random() * 10000)}
                           hover
                           onClick={(event: any) => {
-                            navigate(`/menu/${row.prodId}`);
+                            type === "agent"
+                              ? navigate(`/agent/${row.agentId}`)
+                              : navigate(`/menu/${row.prodId}`);
                           }}
                           sx={{ cursor: "pointer" }}
                         >
                           {Object.keys(row).map((key, index) => (
-                            <TableCell
-                              key={index}
-                              sx={{
-                                borderBottom: isLastRow ? "none" : "inherit",
-                              }}
-                              align={
-                                internalColumnData[index]?.align && "inherit"
-                              }
-                            >
-                              {row[key]}
-                            </TableCell>
+                            <>
+                              <TableCell
+                                key={index}
+                                sx={{
+                                  borderBottom: isLastRow ? "none" : "inherit",
+                                }}
+                                align={
+                                  internalColumnData[index]?.align && "inherit"
+                                }
+                              >
+                                {row[key]}
+                              </TableCell>
+                            </>
                           ))}
+                          {/* <TableCell
+                            key={index}
+                            sx={{
+                              borderBottom: isLastRow ? "none" : "inherit",
+                            }}
+                            align={
+                              internalColumnData[index]?.align && "inherit"
+                            }
+                          >
+                            edit / delete
+                          </TableCell> */}
                         </TableRow>
                       );
                     })}

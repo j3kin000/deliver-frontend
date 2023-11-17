@@ -1,6 +1,6 @@
 import { Fragment, ReactNode } from "react";
 import { RouteType } from "./config";
-import { Route, useRoutes } from "react-router-dom";
+import { Route } from "react-router-dom";
 import PageWrapper from "../components/layout/PageWrapper";
 import { appRoutes } from "./appRoutes";
 

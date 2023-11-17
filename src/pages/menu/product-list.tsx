@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import CustomTable from "../../components/global/CustomTable";
 import { Box } from "@mui/material";
-import { tableHeader } from "../../utils/constants/constants";
 import { getAllProduct } from "../../api/endpoint";
 import SuspenseLoader from "../../components/router/SuspenseLoader";
-import { findLastIndex } from "lodash";
+import { productTableHeader } from "../../utils/constants/constants";
 
 const ProductList = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -23,6 +22,7 @@ const ProductList = () => {
             status: item.status ? "available" : "unavailable",
             price: item.price,
           });
+          return item;
         });
         setProducts(products);
         console.log("prosucst", response);
@@ -41,7 +41,11 @@ const ProductList = () => {
       {loading ? (
         <SuspenseLoader />
       ) : (
-        <CustomTable columnData={tableHeader} rows={products} />
+        <CustomTable
+          columnData={productTableHeader}
+          rows={products}
+          type="product"
+        />
       )}
     </Box>
   );

@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext } from "react";
 import { ReactComponent as DeliveryMan } from "../../assets/images/delivery-man.svg";
 import DeliveryLogo from "../../components/global/DeliveryLogo";
 import LoginForm, { InitValuesType } from "../../components/login/LoginForm";

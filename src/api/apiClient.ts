@@ -13,7 +13,7 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   async (request) => {
     const authorization = localStorage.getItem("access_token");
-    if (authorization != "null") {
+    if (authorization !== "null") {
       request.headers.setAuthorization(`Bearer ${authorization}`);
     } else {
       delete request.headers["Authorization"];

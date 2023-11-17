@@ -20,7 +20,6 @@ import CustomButtonSwitch from "../global/CustomButtonSwitch";
 import CustomSelect from "../global/CustomSelect";
 import { isArray } from "lodash";
 
-import util from "util";
 export type prodImgType = {
   imgUrl: string;
 };
@@ -191,7 +190,7 @@ const ProductForm: FC<ProductFormProps> = ({
                         borderRadius: 0,
                         borderColor: colors.grey[100],
                         boxShadow: "none",
-                        padding: 0,
+                        padding: 0.5,
                         marginBottom: "10px",
                       }}
                     />
@@ -201,7 +200,7 @@ const ProductForm: FC<ProductFormProps> = ({
                         marginBottom: "10px",
                       }}
                     >
-                      <Typography mb={1}>Select Categorys</Typography>
+                      <Typography mb={1}>Select Category</Typography>
                       <CustomSelect
                         items={[
                           { id: 1, value: "Soft Drinks", name: "Soft Drinks" },
@@ -238,7 +237,7 @@ const ProductForm: FC<ProductFormProps> = ({
                           borderRadius: 0,
                           borderColor: colors.grey[100],
                           boxShadow: "none",
-                          padding: 0,
+                          padding: 0.5,
                         }}
                       />
                       <CustomTextInput
@@ -255,7 +254,7 @@ const ProductForm: FC<ProductFormProps> = ({
                           borderRadius: 0,
                           borderColor: colors.grey[100],
                           boxShadow: "none",
-                          padding: 0,
+                          padding: 0.5,
                         }}
                       />
                     </Box>
